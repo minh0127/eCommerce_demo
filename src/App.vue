@@ -1,6 +1,6 @@
 <template>
   <TheNavigation></TheNavigation>
-  <div class="px-10">
+  <div class="pl-10 pr-24">
     <router-view></router-view>
   </div>
 </template>

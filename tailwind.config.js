@@ -9,6 +9,7 @@ module.exports = {
       "sub-color": "#507B54",
       "shading-color": "#E88357",
       white: "#ffffff",
+      yellow: "#eab308",
     },
     fontFamily: {
       sans: ["Source Sans Pro", "sans-serif"],

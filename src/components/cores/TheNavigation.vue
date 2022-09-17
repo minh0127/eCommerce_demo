@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-primary-color h-14 fixed top-0 right-0 w-full rotate-90 translate-x-[47%] translate-y-80 flex items-center justify-center gap-10"
+    class="bg-primary-color h-14 fixed top-0 right-0 w-full rotate-90 translate-x-[48%] translate-y-[21rem] flex items-center justify-center gap-10"
   >
     <button>
       <svg
