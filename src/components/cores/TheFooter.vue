@@ -41,85 +41,132 @@
       </router-link>
     </div>
 
-    <div class="bg-primary-color rounded-tr-2xl py-20">
-      <div class="flex justify-between w-3/4 mx-auto">
-        <div>
-          <ul>
-            <li>
-              <base-button
-                to="/"
-                title="shop"
-                class="text-white text-sm"
-              ></base-button>
-            </li>
-            <li>
-              <base-button
-                to="/"
-                title="recipes"
-                class="text-white text-sm"
-              ></base-button>
-            </li>
-            <li>
-              <base-button
-                to="/"
-                title="about us"
-                class="text-white text-sm"
-              ></base-button>
-            </li>
-            <li>
-              <base-button
-                to="/"
-                title="fermentation"
-                class="text-white text-sm"
-              ></base-button>
-            </li>
-            <li>
-              <base-button
-                to="/"
-                title="account"
-                class="text-white text-sm"
-              ></base-button>
-            </li>
-          </ul>
+    <div class="bg-primary-color rounded-tr-2xl py-12">
+      <div class="w-3/4 mx-auto">
+        <div class="flex justify-between">
+          <div>
+            <ul>
+              <li>
+                <base-button
+                  to="/"
+                  title="shop"
+                  class="text-white text-sm"
+                ></base-button>
+              </li>
+              <li>
+                <base-button
+                  to="/"
+                  title="recipes"
+                  class="text-white text-sm"
+                ></base-button>
+              </li>
+              <li>
+                <base-button
+                  to="/"
+                  title="about us"
+                  class="text-white text-sm"
+                ></base-button>
+              </li>
+              <li>
+                <base-button
+                  to="/"
+                  title="fermentation"
+                  class="text-white text-sm"
+                ></base-button>
+              </li>
+              <li>
+                <base-button
+                  to="/"
+                  title="account"
+                  class="text-white text-sm"
+                ></base-button>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li>
+                <a href="" class="text-white text-sm">INSTAGRAM</a>
+              </li>
+              <li>
+                <a href="" class="text-white text-sm">TIKTOK</a>
+              </li>
+              <li>
+                <a href="" class="text-white text-sm">TWITTER</a>
+              </li>
+              <li>
+                <a href="" class="text-white text-sm">YOUTUBE</a>
+              </li>
+            </ul>
+          </div>
+          <div class="max-w-xs">
+            <p class="text-white font-semibold text-sm">
+              Feed your inbox and belly with mouthwatering recipes and cooking
+              tips.
+            </p>
+            <input
+              type="email"
+              name=""
+              id=""
+              class="mt-5 outline-0 py-3 px-6 w-full rounded-xl text-primary-color bg-background-color placeholder:text-sm"
+              placeholder="ENTER YOUR EMAIL ADDRESS"
+            />
+          </div>
         </div>
+
         <div>
-          <ul>
-            <li>
-              <a href="" class="text-white text-sm">INSTAGRAM</a>
-            </li>
-            <li>
-              <a href="" class="text-white text-sm">TIKTOK</a>
-            </li>
-            <li>
-              <a href="" class="text-white text-sm">TWITTER</a>
-            </li>
-            <li>
-              <a href="" class="text-white text-sm">YOUTUBE</a>
-            </li>
-          </ul>
-        </div>
-        <div class="max-w-xs">
-          <p class="text-white font-semibold text-sm">
-            Feed your inbox and belly with mouthwatering recipes and cooking
-            tips.
-          </p>
-          <input
-            type="email"
-            name=""
-            id=""
-            class="mt-5 outline-0 py-3 px-6 w-full rounded-xl text-primary-color"
-            placeholder="ENTER YOUR EMAIL ADDRESS"
+          <img
+            class="w-14 mt-10 ml-auto cursor-pointer"
+            src="//cdn.shopify.com/s/files/1/0635/2964/8350/files/Back_to_top_x1024.png?v=1648149798"
+            alt=""
+            @click="scrollToTop"
           />
         </div>
+
+        <div
+          class="flex justify-between py-6 border-t border-white border-opacity-50 mt-6"
+        >
+          <ul class="flex gap-12">
+            <li>
+              <a
+                href=""
+                class="text-white text-sm opacity-50 hover:opacity-100 transition-opacity"
+              >
+                PRIVACY</a
+              >
+            </li>
+            <li>
+              <a
+                href=""
+                class="text-white text-sm opacity-50 hover:opacity-100"
+              >
+                TERMS OF SERVICE</a
+              >
+            </li>
+            <li>
+              <a
+                href=""
+                class="text-white text-sm opacity-50 hover:opacity-100"
+              >
+                CONTACT US</a
+              >
+            </li>
+          </ul>
+          <div class="text-white text-sm opacity-50">
+            © 2022 CABI FOODS INC.
+          </div>
+        </div>
       </div>
-
-      <div></div>
-
-      <div></div>
     </div>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  methods: {
+    scrollToTop() {
+      window.scrollTo(0, 0);
+    },
+  },
+};
 </script>
 <style lang=""></style>

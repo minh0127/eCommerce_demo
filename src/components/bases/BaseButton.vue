@@ -14,6 +14,7 @@ export default {
   },
   computed: {
     newTitle() {
+      if (!this.title) return;
       return this.title.toUpperCase();
     },
   },

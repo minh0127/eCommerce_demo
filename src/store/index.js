@@ -1,9 +1,13 @@
 import { createStore } from "vuex";
 
+import foodsModule from "./foods";
+
 export default createStore({
   state: {},
   getters: {},
   mutations: {},
   actions: {},
-  modules: {},
+  modules: {
+    foods: foodsModule,
+  },
 });
