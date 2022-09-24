@@ -1,9 +1,6 @@
 <template>
   <!-- main -->
   <section class="py-8">
-    <!-- header -->
-    <TheHeader class="mb-4"></TheHeader>
-
     <!-- thumbnail -->
     <div class="flex justify-between">
       <div class="flex justify-between flex-col max-w-sm">
@@ -70,9 +67,6 @@
         <SplideSlide v-for="(image, index) in images" :key="index">
           <img :src="image.imgUrl" alt="sample" />
         </SplideSlide>
-        <!-- <SplideSlide v-for="item in 10" :key="item">
-          <span>Love</span>
-        </SplideSlide> -->
       </SplideTrack>
     </Splide>
   </section>
@@ -254,32 +248,23 @@
       </SplideTrack>
     </Splide>
   </section>
-
-  <!-- footer -->
-  <section class="mt-16">
-    <TheFooter></TheFooter>
-  </section>
 </template>
 
 <script>
-import TheHeader from "@/components/cores/TheHeader.vue";
 import ProductList from "../components/cores/ProductList.vue";
-import TheFooter from "@/components/cores/TheFooter.vue";
 
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/vue-splide";
 import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
 
 // @ is an alias to /src
-
+/* eslint-disable vue/no-unused-components */
 export default {
   name: "HomeView",
   components: {
-    TheHeader,
     ProductList,
     Splide,
     SplideSlide,
     SplideTrack,
-    TheFooter,
   },
   data() {
     return {
@@ -311,11 +296,7 @@ export default {
         console.log(error.message || "Something went wrong");
       }
     },
-    log() {
-      console.log(this.images);
-    },
   },
-
   computed: {
     images() {
       return this.$store.getters["foods/foodImgs"];
@@ -323,7 +304,6 @@ export default {
   },
   mounted() {
     this.loadFoodImgs();
-    this.log();
   },
 };
 </script>

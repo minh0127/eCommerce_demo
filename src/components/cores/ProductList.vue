@@ -1,23 +1,23 @@
 <template>
   <div>
     <!-- card -->
-    <div class="flex gap-10">
+    <div class="flex gap-10" v-if="hasData">
       <router-link
         to="/products/"
-        v-for="card in 3"
-        :key="card"
+        v-for="index in 3"
+        :key="index"
         class="group bg-white p-5 rounded-2xl h-[750px] hover:-translate-y-2 hover:shadow-lg transition-transform duration-300"
       >
         <!-- img -->
         <div class="relative h-[458px]">
           <img
             class="absolute bg-background-color h-[458px] rounded-2xl object-contain"
-            src="//cdn.shopify.com/s/files/1/0635/2964/8350/products/Group98928_x2048.png?v=1661369736"
+            :src="products[index - 1].imgs[2]"
             alt=""
           />
           <img
             class="absolute h-[458px] top-0 right-0 left-0 bottom-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-            src="https://cdn.accentuate.io/7641075712222/1657660410188/Image_hover-1.png?v=1661191382291"
+            :src="products[index - 1].imgs[0]"
             alt=""
           />
           <base-button
@@ -28,19 +28,16 @@
         <!-- content -->
         <div class="tracking-wide">
           <h3 class="font-semibold text-sm my-8">
-            Zesty Sansho Peppercorn Miso
+            {{ products[index - 1].name }}
           </h3>
-          <p class="text-xs">
-            Sasho Peppercorn is bold yet subtle, a real sensory experience!
-            We’ve mixed some zesty sansho peppercorn with some sweet miso which
-            gives a nice and unexpected balance. It’s an easy-to-achieve
-            culinary experience from the comfort of your home.
+          <p class="text-xs max-w-[394px]">
+            {{ products[index - 1].description }}
           </p>
           <div
             class="text-xs bg-background-color px-4 py-2 rounded-lg font-semibold mt-16"
           >
             <span class="text-primary-color">Flavor notes</span>
-            Refreshing & Bright
+            {{ products[index - 1].flavor }}
           </div>
         </div>
       </router-link>
@@ -51,6 +48,33 @@
 import BaseButton from "../bases/BaseButton.vue";
 export default {
   components: { BaseButton },
+  data() {
+    return {
+      hasData: false,
+    };
+  },
+  methods: {
+    async loadProducts() {
+      try {
+        await this.$store.dispatch("products/fetchProducts");
+      } catch (error) {
+        console.log(error.message || "Something went wrong");
+      }
+    },
+  },
+  computed: {
+    products() {
+      return this.$store.getters["products/products"];
+    },
+  },
+
+  // reactivity vue đối với products -> async/await nó load xong hết mới mounted/render
+  // và vì chỉ render template 1 lần nên chỉ render khi đã có dữ liệu
+  // nếu không nó render ra null rồi thì products reactive nó cx k render lại!
+  async created() {
+    await this.loadProducts();
+    this.hasData = true;
+  },
 };
 </script>
 <style lang=""></style>

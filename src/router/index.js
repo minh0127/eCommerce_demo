@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import HomeView from "../views/HomeView.vue";
 import ProductsView from "../views/ProductsView.vue";
+import ProductDetail from "../views/ProductDetail.vue";
 import RecipesView from "../views/RecipesView.vue";
 import NotFound from "../views/NotFound.vue";
 
@@ -19,6 +20,14 @@ const routes = [
     path: "/products",
     name: "products",
     component: ProductsView,
+    children: [
+      {
+        path: ":productID",
+        name: "product-detail",
+        component: ProductDetail,
+        props: true,
+      },
+    ],
   },
   {
     path: "/recipes",
@@ -27,6 +36,7 @@ const routes = [
   },
   {
     path: "/:notFound(.*)",
+    name: "not-found",
     component: NotFound,
   },
 ];
