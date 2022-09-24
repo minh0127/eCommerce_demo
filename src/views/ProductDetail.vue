@@ -2,7 +2,31 @@
   <section class="py-8">
     <div class="bg-white px-8 py-10 rounded-2xl flex gap-8">
       <div class="w-2/3">
-        <img :src="selectedProduct.imgs[0]" alt="" />
+        <Splide
+          :options="mainOption"
+          :has-track="false"
+          aria-label="thumbnail-carousel"
+        >
+          <div class="absolute z-10 opacity-0 w-full h-full">
+            <div class="splide__arrows h-full">
+              <button
+                class="splide__arrow splide__arrow--prev w-1/2 h-full"
+              ></button>
+              <button
+                class="splide__arrow splide__arrow--next w-1/2 h-full"
+              ></button>
+            </div>
+          </div>
+          <SplideTrack>
+            <SplideSlide
+              v-for="(image, index) in selectedProduct.imgs"
+              :key="index"
+              class="opacity-60"
+            >
+              <img :src="image" alt="" />
+            </SplideSlide>
+          </SplideTrack>
+        </Splide>
       </div>
 
       <div class="w-1/3 flex flex-col justify-between">
@@ -78,12 +102,21 @@
   </section>
 </template>
 <script>
+import { Splide, SplideSlide, SplideTrack } from "@splidejs/vue-splide";
+
 export default {
+  components: { Splide, SplideSlide, SplideTrack },
   props: ["productID"],
+
   data() {
     return {
       showIngredient: false,
       quantityProduct: 1,
+
+      mainOption: {
+        type: "fade",
+        rewind: true,
+      },
     };
   },
   methods: {
@@ -112,8 +145,12 @@ export default {
   watch: {
     quantityProduct(newVal) {
       newVal = parseInt(newVal);
-      if (/\d[1-9]{1,2}/.test(newVal)) {
-        this.quantityProduct = newVal;
+      if (/[1-9]/.test(newVal)) {
+        if (newVal < 100) {
+          this.quantityProduct = newVal;
+        } else {
+          this.quantityProduct = 99;
+        }
       } else {
         this.quantityProduct = 1;
       }
@@ -124,4 +161,8 @@ export default {
   },
 };
 </script>
-<style lang=""></style>
+<style scoped>
+.is-active {
+  @apply opacity-100;
+}
+</style>
