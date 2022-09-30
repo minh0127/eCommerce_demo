@@ -11,6 +11,11 @@ export default {
     products(state) {
       return state.products;
     },
+    getProductByID: (state) => (productID) => {
+      return state.products.find(
+        (_, index) => index + 1 === parseInt(productID)
+      );
+    },
   },
   mutations: {
     setProducts(state, payload) {
@@ -21,7 +26,6 @@ export default {
     async fetchProducts(context) {
       let data = [];
 
-      // Phải dùng await vì promise.then() chỉ xử lý thằng bên trong axios -> data = []
       await axios
         .get(
           `https://ecommerce-cabi-1cd08-default-rtdb.asia-southeast1.firebasedatabase.app/products.json`

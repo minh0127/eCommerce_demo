@@ -79,7 +79,7 @@
       aria-label="Visions"
       class="relative"
     >
-      <div class="absolute right-0 p-8 z-10">
+      <div class="absolute right-0 p-8 z-[1]">
         <div class="splide__arrows">
           <button class="splide__arrow splide__arrow--prev">
             <svg
@@ -309,6 +309,5 @@ export default {
 </script>
 
 <style>
-/* import global và không ghi đè */
 @import url("../../node_modules/@splidejs/vue-splide/dist/css/splide-core.min.css");
 </style>

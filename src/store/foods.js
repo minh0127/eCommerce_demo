@@ -19,7 +19,6 @@ export default {
     async fetchImgs(context) {
       let data = [];
 
-      // Phải dùng await vì promise.then() chỉ xử lý thằng bên trong axios -> data = []
       await axios
         .get(
           `https://ecommerce-cabi-1cd08-default-rtdb.asia-southeast1.firebasedatabase.app/food-img.json`

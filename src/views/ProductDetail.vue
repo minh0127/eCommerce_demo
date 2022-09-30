@@ -7,7 +7,7 @@
           :has-track="false"
           aria-label="thumbnail-carousel"
         >
-          <div class="absolute z-10 opacity-0 w-full h-full">
+          <div class="absolute z-[5] opacity-0 w-full h-full">
             <div class="splide__arrows h-full">
               <button
                 class="splide__arrow splide__arrow--prev w-1/2 h-full"
@@ -57,21 +57,21 @@
             </div>
           </div>
         </div>
-        <div class="flex gap-2">
-          <div class="relative">
+        <div class="flex gap-4">
+          <div class="relative w-1/3">
             <input
               type="text"
               name=""
               id=""
-              class="border outline-none p-2"
+              class="border outline-none py-2 px-4 rounded-lg w-full"
               v-model="quantityProduct"
             />
-            <div class="absolute top-1 right-2">
+            <div class="absolute top-2 right-4">
               <div @click="quantityProduct++" class="cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  height="16"
-                  width="16"
+                  height="12"
+                  width="12"
                   viewBox="0 0 448 512"
                 >
                   <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
@@ -83,8 +83,8 @@
               <div @click="quantityProduct--" class="cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  height="16"
-                  width="16"
+                  height="12"
+                  width="12"
                   viewBox="0 0 448 512"
                 >
                   <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
@@ -95,7 +95,11 @@
               </div>
             </div>
           </div>
-          <base-button title="add to cart"></base-button>
+          <base-button
+            title="add to cart"
+            class="bg-primary-color text-white rounded-md w-full"
+            @click="setCart"
+          ></base-button>
         </div>
       </div>
     </div>
@@ -116,6 +120,7 @@ export default {
       mainOption: {
         type: "fade",
         rewind: true,
+        pagination: false,
       },
     };
   },
@@ -129,6 +134,17 @@ export default {
     },
     toggleShowIngredient() {
       this.showIngredient = !this.showIngredient;
+    },
+    scrollToTop() {
+      window.scrollTo(0, 0);
+    },
+    setCart() {
+      this.$store.dispatch("cart/setCart", {
+        productID: this.productID,
+        quantity: this.quantityProduct,
+      });
+
+      this.quantityProduct = 1;
     },
   },
   computed: {
@@ -154,6 +170,9 @@ export default {
       } else {
         this.quantityProduct = 1;
       }
+    },
+    productID() {
+      this.scrollToTop();
     },
   },
   async created() {

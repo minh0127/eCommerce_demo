@@ -3,9 +3,9 @@
     <!-- card -->
     <div class="flex gap-10" v-if="hasData">
       <router-link
-        to="/products/"
         v-for="index in 3"
         :key="index"
+        :to="`/products/${index}`"
         class="group bg-white p-5 rounded-2xl h-[750px] hover:-translate-y-2 hover:shadow-lg transition-transform duration-300"
       >
         <!-- img -->
@@ -22,7 +22,7 @@
           />
           <base-button
             class="bg-primary-color text-white rounded-md font-semibold text-sm h-12 text-center leading-[3rem] absolute w-[calc(100%_-_30px)] mx-[15px] -bottom-1 group-hover:bottom-3 opacity-0 group-hover:opacity-100 transition-all duration-500"
-            title="shop now - $15"
+            :title="`shop now - $${products[index - 1].price}`"
           ></base-button>
         </div>
         <!-- content -->

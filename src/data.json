@@ -36,6 +36,7 @@
   ],
   "products": [
     {
+      "price": "15",
       "name": "Umami Dashi Soy Sauce",
       "description": "Dashi is a umami packed flavor bomb. It’s also the backbone of most Japanese dishes. With the versatile flavors of dashi and soy sauce weaved together, a heavenly savory flavor and new staple is created!",
       "flavor": "Savory | Flavorful | Light | Slight Sweetness",
@@ -44,9 +45,12 @@
         "https://firebasestorage.googleapis.com/v0/b/ecommerce-cabi-1cd08.appspot.com/o/products%2FUmami%20Dashi%20Soy%20Sauce%2Fproduct-1.webp?alt=media&token=d8334dea-4889-408d-868a-77c78c373082",
         "https://firebasestorage.googleapis.com/v0/b/ecommerce-cabi-1cd08.appspot.com/o/products%2FUmami%20Dashi%20Soy%20Sauce%2Fproduct-1.2.webp?alt=media&token=9fc6215f-827e-44cc-8ba0-60a364dbf1c7",
         "https://firebasestorage.googleapis.com/v0/b/ecommerce-cabi-1cd08.appspot.com/o/products%2FUmami%20Dashi%20Soy%20Sauce%2Fproduct-1.3.webp?alt=media&token=ff6309aa-29bb-428d-b65c-e6b9c31eef0b"
-      ]
+      ],
+      "mini-img": "https://firebasestorage.googleapis.com/v0/b/ecommerce-cabi-1cd08.appspot.com/o/products%2FUmami%20Dashi%20Soy%20Sauce%2Fumani.png?alt=media&token=4606aa1a-b0da-423e-9ae3-060bb7381ae9"
     },
     {
+      "price": "15",
+
       "name": "Zesty Sansho Peppercorn Miso",
       "description": "Sasho Peppercorn is bold yet subtle, a real sensory experience! We’ve mixed some zesty sansho peppercorn with some sweet miso which gives a nice and unexpected balance. It’s an easy-to-achieve culinary experience from the comfort of your home.",
       "flavor": "Honey-like sweetness | Lemongrassy | Aromatic | Prickly",
@@ -55,9 +59,12 @@
         "https://firebasestorage.googleapis.com/v0/b/ecommerce-cabi-1cd08.appspot.com/o/products%2FZesty%20Sansho%20Peppercorn%20Miso%2Fproduct-2.webp?alt=media&token=f23f5c83-15bd-4024-a696-6128cac4f0bf",
         "https://firebasestorage.googleapis.com/v0/b/ecommerce-cabi-1cd08.appspot.com/o/products%2FZesty%20Sansho%20Peppercorn%20Miso%2Fproduct-2.2.webp?alt=media&token=bffd283d-215e-48e7-b952-8eb84c55b55f",
         "https://firebasestorage.googleapis.com/v0/b/ecommerce-cabi-1cd08.appspot.com/o/products%2FZesty%20Sansho%20Peppercorn%20Miso%2Fproduct-2.3.webp?alt=media&token=e0ef5aaa-7e77-4add-8267-6a9914cd194c"
-      ]
+      ],
+      "mini-img": "https://firebasestorage.googleapis.com/v0/b/ecommerce-cabi-1cd08.appspot.com/o/products%2FZesty%20Sansho%20Peppercorn%20Miso%2Fzesti.png?alt=media&token=d60ba454-dfa6-4840-ba6f-4f946784e705"
     },
     {
+      "price": "15",
+
       "name": "Sweet Yuzu Vinegar",
       "description": "Sweet Yuzu Vinegar gives a refreshing, aromatic, and bright twist to any of your dishes. Also, we’ve mixed in real yuzu peels for some texture and an extra zing.",
       "flavor": "Refreshing & Bright | Zesty | Fruity",
@@ -66,9 +73,12 @@
         "https://firebasestorage.googleapis.com/v0/b/ecommerce-cabi-1cd08.appspot.com/o/products%2FSweet%20Yuzu%20Vinegar%2Fproduct-3.2.webp?alt=media&token=fd48ee36-1242-42d1-9ca3-52d0f418a18d",
         "https://firebasestorage.googleapis.com/v0/b/ecommerce-cabi-1cd08.appspot.com/o/products%2FSweet%20Yuzu%20Vinegar%2Fproduct-3.webp?alt=media&token=7182aaea-b8c4-46c2-81f0-6156c5db6890",
         "https://firebasestorage.googleapis.com/v0/b/ecommerce-cabi-1cd08.appspot.com/o/products%2FSweet%20Yuzu%20Vinegar%2Fproduct-3.3.webp?alt=media&token=4c1fa4ad-9efa-45c0-bb27-73d30f8224f2"
-      ]
+      ],
+      "mini-img": "https://firebasestorage.googleapis.com/v0/b/ecommerce-cabi-1cd08.appspot.com/o/products%2FSweet%20Yuzu%20Vinegar%2Fsweet.png?alt=media&token=8a884c3d-34b7-4288-8863-9f7e44868e96"
     },
     {
+      "price": "45",
+
       "name": "Cabi Original Trio",
       "description": "Bring Japanese food to your home with these 3 unique easy-to-use flavors. Developed for all levels of cooking, or no cooking at all. In the set: Sweet Yuzu Vinegar, Umami Dashi Soy Sauce, Zesty Sansho Peppercorn Miso.",
       "flavor": "",
@@ -80,7 +90,8 @@
         "https://firebasestorage.googleapis.com/v0/b/ecommerce-cabi-1cd08.appspot.com/o/products%2Ftrio%2Ftrio-4.webp?alt=media&token=dfd20ea6-9aa1-4258-a56f-9e48f27443be",
         "https://firebasestorage.googleapis.com/v0/b/ecommerce-cabi-1cd08.appspot.com/o/products%2Ftrio%2Ftrio-5.webp?alt=media&token=66890548-5b28-433a-8153-c2538019424a",
         "https://firebasestorage.googleapis.com/v0/b/ecommerce-cabi-1cd08.appspot.com/o/products%2Ftrio%2Ftrio-6.webp?alt=media&token=22d9a1c4-8b17-49bb-9647-471caedd9af2"
-      ]
+      ],
+      "mini-img": ""
     }
   ]
 }
