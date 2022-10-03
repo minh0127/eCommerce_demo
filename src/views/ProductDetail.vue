@@ -135,9 +135,7 @@ export default {
     toggleShowIngredient() {
       this.showIngredient = !this.showIngredient;
     },
-    scrollToTop() {
-      window.scrollTo(0, 0);
-    },
+
     setCart() {
       this.$store.dispatch("cart/setCart", {
         productID: this.productID,
@@ -170,9 +168,6 @@ export default {
       } else {
         this.quantityProduct = 1;
       }
-    },
-    productID() {
-      this.scrollToTop();
     },
   },
   async created() {
