@@ -3,6 +3,7 @@ import { createStore } from "vuex";
 import foodsModule from "./foods";
 import productsModule from "./products";
 import cartModule from "./cart";
+import recipesModule from "./recipes";
 
 export default createStore({
   state: {},
@@ -13,5 +14,6 @@ export default createStore({
     foods: foodsModule,
     products: productsModule,
     cart: cartModule,
+    recipes: recipesModule,
   },
 });

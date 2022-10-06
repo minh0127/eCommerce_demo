@@ -13,16 +13,18 @@
           type="text"
           name=""
           id=""
-          v-model="recipes.name"
+          v-model="recipe.name"
         />
-        <p class="col-span-5 text-sm text-red">Name cannot be empty!</p>
+        <p v-if="validation.name" class="col-span-5 text-sm text-red">
+          {{ validation.name }}
+        </p>
         <span class="col-span-1">Ingredients: </span>
         <input
           class="col-span-4 border p-1"
           type="text"
           name=""
           id=""
-          v-model="recipes.ingredients"
+          v-model="recipe.ingredients"
         />
         <span class="col-span-1">Notes: </span>
         <textarea
@@ -32,7 +34,7 @@
           cols="50"
           maxlength="200"
           class="resize-none border col-span-4 p-1"
-          v-model="recipes.notes"
+          v-model="recipe.notes"
         ></textarea>
         <span class="col-span-1">Image URL: </span>
         <div class="col-span-4 border p-1">
@@ -44,23 +46,33 @@
             @input="loadPreviewImg"
             class="w-full cursor-pointer"
           />
-          <div v-if="recipes.imgURL">
-            <img :src="recipes.imgURL" alt="" class="max-h-64" />
+          <div v-if="previewImg">
+            <img :src="previewImg" alt="" class="max-h-56" />
           </div>
         </div>
-        <p class="col-span-5 text-sm text-red">Image URL cannot be empty!</p>
+        <p v-if="validation.imgURL" class="col-span-5 text-sm text-red">
+          {{ validation.imgURL }}
+        </p>
       </div>
       <div class="flex gap-5 justify-end">
         <base-button
           title="Close"
           class="text-sub-color w-full h-12 rounded-lg font-semibold text-sm text-center leading-[3rem] bg-white mt-6 border border-sub-color"
-          @click.stop="this.$emit('closeModal', false)"
+          @click.stop="closeModal"
         >
         </base-button>
         <base-button
+          v-if="!editMode.state"
           title="Add"
           class="text-white w-full h-12 rounded-lg font-semibold text-sm text-center leading-[3rem] bg-sub-color mt-6"
-          @click.stop="uploadToStorage"
+          @click.stop="addRecipe"
+        >
+        </base-button>
+        <base-button
+          v-else
+          title="Update"
+          class="text-white w-full h-12 rounded-lg font-semibold text-sm text-center leading-[3rem] bg-sub-color mt-6"
+          @click.stop="updateRecipe"
         >
         </base-button>
       </div>
@@ -70,46 +82,146 @@
 
 <script>
 import { storage } from "../../../firebase.js";
-import { ref, uploadBytes } from "firebase/storage";
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage";
 export default {
   props: {
     showModal: { type: Boolean },
+    editMode: {
+      type: Object,
+    },
   },
   data() {
     return {
-      // previewImg: null,
+      previewImg: null,
       file: null,
-      recipes: {
+      validation: {
         name: "",
-        ingredients: "",
-        notes: "",
         imgURL: "",
       },
     };
   },
   methods: {
-    validate() {},
+    resetValidation() {
+      this.validation = {
+        name: "",
+        imgURL: "",
+      };
+    },
+
+    validate() {
+      let rs = true;
+      this.resetValidation();
+
+      if (this.recipe.name === "") {
+        this.validation.name = "Name cannot be empty!";
+        rs = false;
+      }
+      if (!this.previewImg && this.editMode.state === false) {
+        this.validation.imgURL = "Image URL cannot be empty!";
+        rs = false;
+      }
+      return rs;
+    },
+
+    closeModal() {
+      this.$emit("closeModal", false);
+      this.previewImg = null;
+    },
+
     loadPreviewImg(e) {
       this.file = e.target.files[0];
       const reader = new FileReader();
       reader.onload = () => {
-        // this.previewImg = reader.result;
-        this.recipes.imgURL = reader.result;
+        this.previewImg = reader.result;
       };
       reader.readAsDataURL(this.file);
     },
+
     async uploadToStorage() {
       const storageRef = ref(storage, `recipes/${this.file.name}`);
+      console.log(storageRef.fullPath);
+      this.recipe.path = storageRef.fullPath;
+
       // const metadata = {
       //   contentType: "image/webp",
       // };
 
-      // có ở storage rồi nó sẽ không up lại
+      // có ở storage rồi nó sẽ ghi đúng vào tên đã có với url mới nhưng url cũ vẫn hoạt động ????
+      // await uploadBytes(storageRef, this.file, metadata);
       await uploadBytes(storageRef, this.file);
-      alert("uploaded");
+
+      // upload xong thì lấy url
+      this.recipe.imgURL = await getDownloadURL(storageRef);
     },
-    log() {
-      console.log("hi");
+
+    async deleteFileStorage() {
+      // kiểm tra có 1 thằng path này thì xoá không thì thôi
+      const numberOfTheSamePath = this.$store.getters[
+        "recipes/numberOfTheSamePath"
+      ](this.recipe.path);
+      console.log(numberOfTheSamePath);
+      if (numberOfTheSamePath <= 1) {
+        console.log("xoá " + this.recipe.path);
+
+        const deleteRef = ref(storage, this.recipe.path);
+        await deleteObject(deleteRef);
+      }
+    },
+
+    async addRecipe() {
+      this.validate();
+      if (this.validate()) {
+        this.closeModal();
+
+        await this.uploadToStorage();
+
+        await this.$store.dispatch("recipes/addRecipe", this.recipe);
+      }
+    },
+
+    async updateRecipe() {
+      this.validate();
+      if (this.validate()) {
+        this.closeModal();
+
+        await this.deleteFileStorage();
+        await this.uploadToStorage();
+
+        await this.$store.dispatch("recipes/updateRecipe", {
+          id: this.editMode.id,
+          ...this.recipe,
+        });
+      }
+    },
+  },
+  computed: {
+    recipe() {
+      if (!this.editMode.state) {
+        return {
+          name: "",
+          ingredients: "",
+          notes: "",
+          imgURL: "",
+          path: "",
+        };
+      } else {
+        // return thằng recipeByID sẽ bị trỏ đến cùng 1 obj
+        const recipeByID = this.$store.getters["recipes/recipeByID"](
+          this.editMode.id
+        );
+        return {
+          name: recipeByID.name,
+          ingredients: recipeByID.ingredients,
+          notes: recipeByID.notes,
+          imgURL: recipeByID.imgURL,
+          path: recipeByID.path,
+        };
+      }
     },
   },
 };

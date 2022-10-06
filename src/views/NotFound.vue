@@ -1,4 +1,4 @@
-<!-- <template lang="">
+<template lang="">
   <div class="flex flex-col justify-center items-center h-[600px]">
     <svg
       width="92"
@@ -40,66 +40,4 @@
       class="bg-primary-color text-white rounded-md font-semibold text-sm h-12 mt-12 flex justify-center items-center w-max px-8 hover:bg-background-color hover:text-primary-color hover:outline-primary-color hover:border transition-colors"
     ></base-button>
   </div>
-</template> -->
-<template lang="">
-  <div>test ở not found</div>
-  <input
-    type="file"
-    id="avatar"
-    name="avatar"
-    accept="image/png, image/jpeg"
-    @input="upload"
-    ref="inputfile"
-  />
-  <div v-if="imgPreview">
-    <img :src="imgPreview" alt="" />
-  </div>
 </template>
-<script>
-import { storage } from "../../firebase.js";
-import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
-export default {
-  data() {
-    return {
-      img: null,
-      imgPreview: null,
-    };
-  },
-  methods: {
-    async upload(e) {
-      /**
-       * upload
-       */
-      // TODO: upload error img
-      const file = e.target.files[0];
-
-      // xem trướcảnh
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.imgPreview = reader.result;
-      };
-      reader.readAsDataURL(file);
-
-      // up ảnh
-      const storageRef = ref(storage, `recipes/${file.name}`);
-      const metadata = {
-        contentType: "image/webp",
-      };
-
-      await uploadBytes(storageRef, file, metadata);
-    },
-  },
-  async created() {
-    /**
-     * xem
-     */
-    this.img = ref(
-      storage,
-      "gs://ecommerce-cabi-1cd08.appspot.com/products/Sweet Yuzu Vinegar/ingre-3.webp"
-    );
-    const imgUrl = await getDownloadURL(this.img);
-    console.log(imgUrl);
-  },
-};
-</script>
-<style lang=""></style>
