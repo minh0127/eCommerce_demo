@@ -10,7 +10,6 @@
         :editMode="editMode"
       ></TheModal>
 
-      <!-- add icon -->
       <div
         class="flex justify-center items-center gap-5 p-10 border-b cursor-pointer"
         @click="changeToAddMode"
@@ -33,13 +32,10 @@
         >
       </div>
 
-      <!-- cụm bên dưới -->
       <div
         class="max-h-[calc(750px_-_137px)]"
         :class="{ 'overflow-y-scroll': recipes.length > 1 }"
       >
-        <!-- 1 thẻ công thức -->
-
         <div
           class="flex p-10 gap-20 items-center max-h-80 my-4"
           v-for="(recipe, index) in recipes"
@@ -129,7 +125,6 @@
         </div>
       </div>
 
-      <!-- basedialog -->
       <BaseDialog
         @closeDialog="(closeDialog) => (showDialog = closeDialog)"
         v-if="showDialog"

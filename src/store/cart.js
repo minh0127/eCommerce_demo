@@ -12,7 +12,6 @@ export default {
   },
   mutations: {
     setCart(state, payload) {
-      // gán bằng thằng cart fetch từ API
       state.cart = payload;
     },
     addCart(state, payload) {
@@ -26,9 +25,6 @@ export default {
   },
   actions: {
     setCart(context, payload) {
-      // if 1. fetch từ api use
-
-      // else 1. set từ browser -> nếu có rồi thì replace, chưa có thì add
       const existingItem = context.state.cart.find(
         (item) => item.productID === payload.productID
       );
@@ -38,7 +34,6 @@ export default {
       } else {
         context.commit("addCart", payload);
       }
-      // 2. set
     },
     removeCart(context, payload) {
       context.commit("removeCart", payload);

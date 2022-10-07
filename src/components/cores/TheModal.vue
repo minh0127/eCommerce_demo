@@ -13,7 +13,7 @@
           type="text"
           name=""
           id=""
-          v-model="recipe.name"
+          v-model.trim="recipe.name"
         />
         <p v-if="validation.name" class="col-span-5 text-sm text-red">
           {{ validation.name }}
@@ -24,7 +24,7 @@
           type="text"
           name=""
           id=""
-          v-model="recipe.ingredients"
+          v-model.trim="recipe.ingredients"
         />
         <span class="col-span-1">Notes: </span>
         <textarea
@@ -34,7 +34,7 @@
           cols="50"
           maxlength="200"
           class="resize-none border col-span-4 p-1"
-          v-model="recipe.notes"
+          v-model.trim="recipe.notes"
         ></textarea>
         <span class="col-span-1">Image URL: </span>
         <div class="col-span-4 border p-1">
@@ -144,30 +144,18 @@ export default {
 
     async uploadToStorage() {
       const storageRef = ref(storage, `recipes/${this.file.name}`);
-      console.log(storageRef.fullPath);
       this.recipe.path = storageRef.fullPath;
 
-      // const metadata = {
-      //   contentType: "image/webp",
-      // };
-
-      // có ở storage rồi nó sẽ ghi đúng vào tên đã có với url mới nhưng url cũ vẫn hoạt động ????
-      // await uploadBytes(storageRef, this.file, metadata);
       await uploadBytes(storageRef, this.file);
 
-      // upload xong thì lấy url
       this.recipe.imgURL = await getDownloadURL(storageRef);
     },
 
     async deleteFileStorage() {
-      // kiểm tra có 1 thằng path này thì xoá không thì thôi
       const numberOfTheSamePath = this.$store.getters[
         "recipes/numberOfTheSamePath"
       ](this.recipe.path);
-      console.log(numberOfTheSamePath);
       if (numberOfTheSamePath <= 1) {
-        console.log("xoá " + this.recipe.path);
-
         const deleteRef = ref(storage, this.recipe.path);
         await deleteObject(deleteRef);
       }

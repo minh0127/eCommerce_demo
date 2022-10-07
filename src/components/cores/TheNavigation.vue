@@ -2,7 +2,6 @@
   <div :class="showCartShopClass" @click="showCartShop = false"></div>
 
   <div>
-    <!-- nav -->
     <div
       :style="{ 'background-color': backgroundColorClass }"
       :class="{ 'right-[345px]': showCartShop }"
@@ -89,7 +88,6 @@
       </button>
     </div>
 
-    <!-- cart -->
     <div
       class="fixed top-0 -right-[350px] w-[350px] h-full z-50"
       :style="[
@@ -220,7 +218,6 @@
             </div>
           </div>
 
-          <!-- decoration -->
           <div class="absolute -bottom-5">
             <svg
               width="318"

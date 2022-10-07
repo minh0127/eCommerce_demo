@@ -46,7 +46,6 @@ export default {
         id: key,
         ...payload[key],
       }));
-      console.log(fetchedData);
       state.recipes = fetchedData;
     },
 
@@ -56,7 +55,6 @@ export default {
 
     updateRecipe(state, payload) {
       let index = state.recipes.findIndex((recipe) => recipe.id === payload.id);
-      console.log(index);
       state.recipes[index] = { id: payload.id, ...payload.updateData };
     },
 
@@ -76,8 +74,6 @@ export default {
         )
         .then((res) => {
           data = res.data;
-          // vì có key nên res.data là object
-          console.log(data);
         })
         .catch((err) => console.log(err));
 
@@ -98,7 +94,6 @@ export default {
         recipeData
       );
 
-      console.log(res);
       if (res.status === 200) {
         // context.commit("addRecipe", recipeData);
         await context.dispatch("loadRecipes");

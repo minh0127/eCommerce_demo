@@ -35,14 +35,10 @@ export default {
     },
 
     async deleteFileStorage() {
-      // kiểm tra có 1 thằng path này thì xoá không thì thôi
       const numberOfTheSamePath = this.$store.getters[
         "recipes/numberOfTheSamePath"
       ](this.deletedRecipe.path);
-      console.log(numberOfTheSamePath);
       if (numberOfTheSamePath <= 1) {
-        console.log("xoá " + this.deletedRecipe.path);
-
         const deleteRef = ref(storage, this.deletedRecipe.path);
         await deleteObject(deleteRef);
       }

@@ -1,14 +1,12 @@
 <template>
   <div>
-    <!-- card -->
     <div class="flex gap-10" v-if="hasData">
       <router-link
         v-for="index in 3"
         :key="index"
         :to="`/products/${index}`"
-        class="group bg-white p-5 rounded-2xl h-[750px] hover:-translate-y-2 hover:shadow-lg transition-transform duration-300"
+        class="group bg-white p-5 rounded-2xl h-[750px] hover:-translate-y-2 hover:shadow-lg transition-transform duration-300 flex-1"
       >
-        <!-- img -->
         <div class="relative h-[458px]">
           <img
             class="absolute bg-background-color h-[458px] rounded-2xl object-contain"
@@ -25,18 +23,21 @@
             :title="`shop now - $${products[index - 1].price}`"
           ></base-button>
         </div>
-        <!-- content -->
-        <div class="tracking-wide">
-          <h3 class="font-semibold text-sm my-8">
-            {{ products[index - 1].name }}
-          </h3>
-          <p class="text-xs max-w-[394px]">
-            {{ products[index - 1].description }}
-          </p>
+        <div
+          class="tracking-wide flex flex-col justify-between h-[calc(100%_-_458px)]"
+        >
+          <div>
+            <h3 class="font-semibold text-sm my-8">
+              {{ products[index - 1].name }}
+            </h3>
+            <p class="text-xs max-w-[394px] 2xl:max-w-none">
+              {{ products[index - 1].description }}
+            </p>
+          </div>
           <div
-            class="text-xs bg-background-color px-4 py-2 rounded-lg font-semibold mt-16"
+            class="text-xs bg-background-color px-4 py-2 rounded-lg font-semibold"
           >
-            <span class="text-primary-color">Flavor notes</span>
+            <span class="text-primary-color">Flavor notes: </span>
             {{ products[index - 1].flavor }}
           </div>
         </div>
@@ -68,13 +69,9 @@ export default {
     },
   },
 
-  // reactivity vue đối với products -> async/await nó load xong hết mới mounted/render
-  // và vì chỉ render template 1 lần nên chỉ render khi đã có dữ liệu
-  // nếu không nó render ra null rồi thì products reactive nó cx k render lại!
   async created() {
     await this.loadProducts();
     this.hasData = true;
   },
 };
 </script>
-<style lang=""></style>

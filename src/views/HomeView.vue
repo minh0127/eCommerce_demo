@@ -1,7 +1,5 @@
 <template>
-  <!-- main -->
   <section class="py-8">
-    <!-- thumbnail -->
     <div class="flex justify-between">
       <div class="flex justify-between flex-col max-w-sm">
         <div class="mt-12">
@@ -44,7 +42,6 @@
     </div>
   </section>
 
-  <!-- products -->
   <section class="py-8">
     <ProductList></ProductList>
     <div class="flex justify-center mt-12">
@@ -55,7 +52,6 @@
     </div>
   </section>
 
-  <!-- carousel -->
   <section class="py-8">
     <Splide
       :options="autoScrollOptions"
@@ -71,7 +67,6 @@
     </Splide>
   </section>
 
-  <!-- vision and mission -->
   <section class="py-8">
     <Splide
       :options="sliderOptions"
